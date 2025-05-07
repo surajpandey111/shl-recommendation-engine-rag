@@ -4,23 +4,14 @@ import google.generativeai as genai
 class RAGEngine:
     def __init__(self, gemini_api_key, csv_path="shl_product_catalog.csv"):
         # Configure Gemini API
-        try:
-            genai.configure(api_key=gemini_api_key)
-            self.model = genai.GenerativeModel('gemini-pro')  # Update this if your model name is different
-        except Exception as e:
-            raise ValueError(f"Failed to configure Gemini API: {str(e)}")
-
+        genai.configure(api_key=gemini_api_key)
+        self.model = genai.GenerativeModel('gemini-pro')  # Update this if your model name is different
         # Load the product catalog
-        try:
-            self.df = pd.read_csv(csv_path)
-            # Fill NaN values to avoid issues with str.contains
-            self.df["Job Level"] = self.df["Job Level"].fillna("")
-            self.df["Languages"] = self.df["Languages"].fillna("")
-            self.df["Test Type"] = self.df["Test Type"].fillna("")
-        except FileNotFoundError as e:
-            raise FileNotFoundError(f"Could not find the CSV file at {csv_path}. Please ensure it is in the correct directory.")
-        except Exception as e:
-            raise ValueError(f"Failed to load CSV file: {str(e)}")
+        self.df = pd.read_csv(csv_path)
+        # Fill NaN values to avoid issues with str.contains
+        self.df["Job Level"] = self.df["Job Level"].fillna("")
+        self.df["Languages"] = self.df["Languages"].fillna("")
+        self.df["Test Type"] = self.df["Test Type"].fillna("")
 
     def retrieve(self, query):
         # Extract Job Level from the query
@@ -45,7 +36,7 @@ class RAGEngine:
         if matched_test_type:
             filtered_df = filtered_df[filtered_df["Test Type"].str.contains(matched_test_type, case=False, na=False)]
 
-        # If no filters matched, return the top 3 rows as a fallback
+        # If no filters matched, return the top 3 rows as a fallback (reduced for API brevity)
         if filtered_df.empty:
             filtered_df = self.df.head(3)
 
