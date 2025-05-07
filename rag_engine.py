@@ -5,7 +5,7 @@ class RAGEngine:
     def __init__(self, gemini_api_key, csv_path="shl_product_catalog.csv"):
         # Configure Gemini API
         genai.configure(api_key=gemini_api_key)
-        self.model = genai.GenerativeModel('gemini-pro')  # Update this if your model name is different
+        self.model = genai.GenerativeModel("gemini-2.0-flash")  # Update this if your model name is different
         # Load the product catalog
         self.df = pd.read_csv(csv_path)
         # Fill NaN values to avoid issues with str.contains
