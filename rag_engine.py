@@ -4,14 +4,23 @@ import google.generativeai as genai
 class RAGEngine:
     def __init__(self, gemini_api_key, csv_path="shl_product_catalog.csv"):
         # Configure Gemini API
-        genai.configure(api_key=gemini_api_key)
-        self.model = genai.GenerativeModel('gemini-2.0-flash')  # Update this if your model name is different
+        try:
+            genai.configure(api_key=gemini_api_key)
+            self.model = genai.GenerativeModel('gemini-pro')  # Update this if your model name is different
+        except Exception as e:
+            raise ValueError(f"Failed to configure Gemini API: {str(e)}")
+
         # Load the product catalog
-        self.df = pd.read_csv(csv_path)
-        # Fill NaN values to avoid issues with str.contains
-        self.df["Job Level"] = self.df["Job Level"].fillna("")
-        self.df["Languages"] = self.df["Languages"].fillna("")
-        self.df["Test Type"] = self.df["Test Type"].fillna("")
+        try:
+            self.df = pd.read_csv(csv_path)
+            # Fill NaN values to avoid issues with str.contains
+            self.df["Job Level"] = self.df["Job Level"].fillna("")
+            self.df["Languages"] = self.df["Languages"].fillna("")
+            self.df["Test Type"] = self.df["Test Type"].fillna("")
+        except FileNotFoundError as e:
+            raise FileNotFoundError(f"Could not find the CSV file at {csv_path}. Please ensure it is in the correct directory.")
+        except Exception as e:
+            raise ValueError(f"Failed to load CSV file: {str(e)}")
 
     def retrieve(self, query):
         # Extract Job Level from the query
@@ -36,9 +45,9 @@ class RAGEngine:
         if matched_test_type:
             filtered_df = filtered_df[filtered_df["Test Type"].str.contains(matched_test_type, case=False, na=False)]
 
-        # If no filters matched, return the top 5 rows as a fallback
+        # If no filters matched, return the top 3 rows as a fallback
         if filtered_df.empty:
-            filtered_df = self.df.head(5)
+            filtered_df = self.df.head(3)
 
         return filtered_df
 
@@ -46,10 +55,13 @@ class RAGEngine:
         # Convert retrieved data to string for Gemini
         catalog_str = retrieved_df.to_string(index=False)
         # Generate recommendation using Gemini
-        prompt = f"Based on the following SHL assessment catalog, recommend an assessment for this query: '{query}'\n\n{catalog_str}\n\nProvide a concise recommendation (1-2 sentences)."
+        prompt = f"Based on the following SHL assessment catalog, recommend an assessment for this query: '{query}'\n\n{catalog_str}\n\nProvide a concise recommendation (1 sentence)."
         try:
             response = self.model.generate_content(prompt)
-            recommendation = response.text
+            recommendation = response.text.strip()
+            # Ensure the recommendation is concise
+            if len(recommendation.split('.')) > 2:
+                recommendation = recommendation.split('.')[0] + '.'
         except Exception as e:
             recommendation = f"Error generating recommendation: {str(e)}"
         return recommendation
@@ -65,4 +77,3 @@ class RAGEngine:
             "recommendation": recommendation,
             "filtered_assessments": retrieved_df.to_dict(orient="records")
         }
-        
