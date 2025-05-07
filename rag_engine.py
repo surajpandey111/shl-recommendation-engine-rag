@@ -8,7 +8,7 @@ class RAGEngine:
         self.model = genai.GenerativeModel("gemini-2.0-flash")  # Update this if your model name is different
         # Load the product catalog
         self.df = pd.read_csv(csv_path)
-        # Fill NaN values to avoid issues with str.contains
+        
         self.df["Job Level"] = self.df["Job Level"].fillna("")
         self.df["Languages"] = self.df["Languages"].fillna("")
         self.df["Test Type"] = self.df["Test Type"].fillna("")
