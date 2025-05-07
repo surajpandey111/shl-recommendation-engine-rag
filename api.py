@@ -24,7 +24,7 @@ except Exception as e:
 @app.route('/', methods=['GET'])
 def home():
     html = """
-    <h1>SHL Assessment Recommendation Engine</h1>
+    <h1>SHL Assessment Recommendation Engine API End Point</h1>
     <form method="POST" action="/recommend">
         <label for="query">Enter your query:</label><br>
         <input type="text" id="query" name="query" value="Which assessment for a manager in English with personality test?" style="width: 500px;"><br><br>
