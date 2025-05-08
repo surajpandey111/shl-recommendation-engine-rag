@@ -7,7 +7,7 @@ This repository contains the main implementation of the SHL Assessment Recommend
 This project uses a RAG-based approach to recommend SHL assessments based on user queries. It includes a Streamlit web app for user interaction and a Flask API for generating recommendations.
 
 - **Streamlit Web App**: [https://shl-recommendation-engine-rag-suraj.streamlit.app/](https://shl-recommendation-engine-rag-suraj.streamlit.app/)
-- **Flask API**: [https://shl-recommendation-api-w7qe.onrender.com/recommend](https://shl-recommendation-api-w7qe.onrender.com/recommend) (Note: Hosted on Render’s free tier; first request may take 10–30 seconds due to cold starts.)
+- **Flask API**: [https://shl-recommendation-api-w7qe.onrender.com/recommend]([https://shl-recommendation-api-w7qe.onrender.com/recommend](https://shl-recommendation-api-w7qe.onrender.com/) (Note: Hosted on Render’s free tier; first request may take 10–30 seconds due to cold starts.)
 - **GitHub Repository (Streamlit App & Flask API)**: [https://github.com/surajpandey111/shl-recommendation-engine-rag](https://github.com/surajpandey111/shl-recommendation-engine-rag)
 
 ### Features
