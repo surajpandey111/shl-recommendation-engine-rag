@@ -8,8 +8,7 @@ This project uses a RAG-based approach to recommend SHL assessments based on use
 
 - **Streamlit Web App**: [https://shl-recommendation-engine-rag-suraj.streamlit.app/](https://shl-recommendation-engine-rag-suraj.streamlit.app/)
 - **Flask API**: [https://shl-recommendation-api-w7qe.onrender.com/recommend](https://shl-recommendation-api-w7qe.onrender.com/recommend) (Note: Hosted on Render’s free tier; first request may take 10–30 seconds due to cold starts.)
-- **GitHub Repository (Streamlit App)**: [https://github.com/surajpandey111/shl-recommendation-engine-rag](https://github.com/surajpandey111/shl-recommendation-engine-rag)
-- **GitHub Repository (Flask API)**: [https://github.com/surajpandey111/shl-recommendation-engine-rag-new](https://github.com/surajpandey111/shl-recommendation-engine-rag-new)
+- **GitHub Repository (Streamlit App & Flask API)**: [https://github.com/surajpandey111/shl-recommendation-engine-rag](https://github.com/surajpandey111/shl-recommendation-engine-rag)
 
 ### Features
 - **Retrieval**: Filters the SHL product catalog (`shl_product_catalog.csv`) based on query keywords (e.g., Job Level, Language, Test Type).
