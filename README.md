@@ -30,4 +30,4 @@ This project uses a more advanced RAG implementation with LangChain, FAISS, and 
 - **User Interface**: A Streamlit web app for inputting queries and viewing recommendations.
 
 ## Submission Details
-This project was submitted as part of the SHL Research Intern application (late submission). The main implementation (`SHL_Recommendation_RAG`) meets all requirements, including a web app and API endpoint. The alternative implementation (`SHL_Recommendation`) demonstrates an advanced RAG approach using modern NLP tools.
+This project was submitted as part of the SHL Research Intern application by Suraj Kumar Pandey. The main implementation (`SHL_Recommendation_RAG`) meets all requirements, including a web app and API endpoint. The alternative implementation (`SHL_Recommendation`) demonstrates an advanced RAG approach using modern NLP tools.
